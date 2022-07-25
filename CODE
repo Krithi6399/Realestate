@@ -1,0 +1,26 @@
+#/Users/krithichandrashekar/Desktop
+#set working directory
+getwd()
+setwd("/Users/krithichandrashekar/Desktop")
+library(tidyverse)
+library(skimr)
+library(car)
+real <- read.csv("Realestate.csv")
+# Plot a linear model for price per unit vs independent varibles to see which of them describes the price of the houses better
+model1 <- lm(price.per.unit ~ house.age,real)
+summary(model1)
+
+plot(real$house.age,real$price.per.unit,pch = 16,cex = 1, col = "blue",main = "house age vs price per unit", xlab = "House age",ylab="Price per unit")
+abline(model1, lwd=2, col="red")
+
+confint(model1,level = 0.95)
+
+model1 <- lm(price.per.unit ~ nearest.station,real)
+summary(model1)
+plot(real$nearest.station,real$price.per.unit,pch = 16,cex = 1, col = "blue",main = "nearest station vs price per unit", xlab = "nearest station",ylab="Price per unit")
+abline(model1, lwd=2, col="red")
+
+model1 <- lm(price.per.unit ~ convenience.stores,real)
+summary(model1)
+plot(real$convenience.stores,real$price.per.unit,pch = 16,cex = 1, col = "blue",main = "convenience stores vs price per unit", xlab = "convenience stores",ylab="Price per unit")
+abline(model1, lwd=2, col="red")
